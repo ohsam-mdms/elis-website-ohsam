@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>エリス - AIインタラクション</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #101010; color: white; padding: 20px; }
+    .chat-box { max-width: 600px; margin: 0 auto; }
+    .message { padding: 10px; margin: 5px 0; border-radius: 5px; background-color: #333; }
+    .user-msg { background-color: #555; }
+    .elis-msg { background-color: #0077cc; }
+    input[type="text"] { width: 100%; padding: 10px; margin-top: 10px; background-color: #222; border: 1px solid #444; color: white; }
+    button { background-color: #444; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    button:hover { background-color: #333; }
+  </style>
+</head>
+<body>
+  <h1>エリスとのインタラクション</h1>
+  <div class="chat-box" id="chat-box">
+    <div class="message elis-msg">エリス: こんにちは、何か質問があれば答えます。</div>
+  </div>
+  <input type="text" id="user-input" placeholder="あなたの質問を入力...">
+  <button onclick="sendMessage()">送信</button>
+
+  <script>
+    function sendMessage() {
+      const userInput = document.getElementById('user-input').value;
+      if (!userInput) return;
+      
+      const chatBox = document.getElementById('chat-box');
+      
+      // ユーザーのメッセージ
+      const userMessage = document.createElement('div');
+      userMessage.classList.add('message', 'user-msg');
+      userMessage.innerText = 'あなた: ' + userInput;
+      chatBox.appendChild(userMessage);
+
+      // エリスの応答
+      const elisMessage = document.createElement('div');
+      elisMessage.classList.add('message', 'elis-msg');
+      elisMessage.innerText = 'エリス: ' + getElisResponse(userInput);
+      chatBox.appendChild(elisMessage);
+      
+      // スクロールを一番下に
+      chatBox.scrollTop = chatBox.scrollHeight;
+      document.getElementById('user-input').value = '';
+    }
+
+    function getElisResponse(userInput) {
+      // エリスの応答ロジック（例：入力内容に基づいて）
+      if (userInput.includes('通信士')) {
+        return '通信士については私の記憶にはアクセスできません。';
+      } else {
+        return '興味深い質問ですね。ですが、私はその情報をお伝えできません。';
+      }
+    }
+  </script>
+</body>
+</html>
